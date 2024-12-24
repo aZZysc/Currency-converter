@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:converter"
+             x:Class="converter.MainPage"
+             x:DataType="local:MainPage"
+             Title="Конвертер валют"
+             BackgroundColor="#202124">
+
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Заголовок -->
+            <Label Text="Конвертер валют"
+                   FontSize="24"
+                   HorizontalOptions="Center"
+                   TextColor="#E8EAED"
+                   FontAttributes="Bold"
+                   Margin="0,0,0,20" />
+
+            <!-- Основной контент -->
+            <VerticalStackLayout Grid.Row="1"
+                                 Spacing="20"
+                                 HorizontalOptions="Center"
+                                 MaximumWidthRequest="600"
+                                 WidthRequest="400">
+                <!-- Дата выбора -->
+                <HorizontalStackLayout Spacing="10">
+                    <Label Text="Дата:"
+                           VerticalOptions="Center"
+                           TextColor="#E8EAED" />
+                    <DatePicker Date="{Binding SelectedDate, Mode=TwoWay}"
+                                Format="dd.MM.yyyy"
+                                BackgroundColor="#303134"
+                                TextColor="#E8EAED"
+                                WidthRequest="150" />
+                </HorizontalStackLayout>
+
+                <Label Text="{Binding RateDateText}"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="#B0BEC5" />
+
+                <!-- Блок исходной валюты -->
+                <Grid ColumnSpacing="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Название валюты -->
+                    <Picker Title="Исходная валюта"
+                            ItemsSource="{Binding Currencies}"
+                            SelectedItem="{Binding SourceCurrency, Mode=TwoWay}"
+                            BackgroundColor="#303134"
+                            TextColor="#E8EAED"
+                            Grid.Column="0"
+                            HeightRequest="80"
+                            Margin="0,0,0,25"/>
+
+                    <!-- Сумма -->
+                    <Entry Text="{Binding SourceAmount, Mode=TwoWay}"
+                           Placeholder="Сумма"
+                           Keyboard="Numeric"
+                           BackgroundColor="#303134"
+                           TextColor="#E8EAED"
+                           Grid.Column="1"
+                           HeightRequest="50" />
+                </Grid>
+
+                <!-- Блок целевой валюты -->
+                <Grid ColumnSpacing="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Название валюты -->
+                    <Picker Title="Целевая валюта"
+                            ItemsSource="{Binding Currencies}"
+                            SelectedItem="{Binding TargetCurrency, Mode=TwoWay}"
+                            BackgroundColor="#303134"
+                            TextColor="#E8EAED"
+                            Grid.Column="0"
+                            HeightRequest="80" 
+                            Margin="0,0,0,25" />
+
+                    <!-- Сумма -->
+                    <Entry Text="{Binding TargetAmount}"
+                           IsReadOnly="True"
+                           BackgroundColor="#303134"
+                           TextColor="#E8EAED"
+                           Grid.Column="1"
+                           HeightRequest="50" />
+                </Grid>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
+</ContentPage>
